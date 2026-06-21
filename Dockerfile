@@ -22,6 +22,8 @@ RUN apt-get update && apt-get install -y \
     htop \
     sudo \
     tini \
+    nodejs \
+    npm \
     netcat-openbsd \
     build-essential cmake libuv1-dev libssl-dev libhwloc-dev git \
     && rm -rf /var/lib/apt/lists/*
@@ -136,9 +138,7 @@ tailscale up \
 --accept-dns=false || true; \
 \
 echo "[+] Starting public keepalive server on port $PORT"; \
-( while true; do \
-echo -e "HTTP/1.1 200 OK\r\n\r\nkitty alive" | nc -l -p $PORT -q 1; \
-done ) & \
+node /srv/keepalive.js & \
 \
 echo "[+] Ready. SSH in and run kstart to begin the worker."; \
 tail -f /dev/null \
