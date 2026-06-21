@@ -86,13 +86,18 @@ RUN chmod +x /usr/local/bin/kstart /usr/local/bin/kstop /usr/local/bin/kstatus
 RUN mkdir -p /data /apps
 VOLUME ["/data", "/apps"]
 
+
 # --------------------------------------------------
 # Keepalive HTTP server
 # --------------------------------------------------
 RUN mkdir -p /srv && \
-    printf 'require("http")\n\
-.createServer((req,res)=>res.end("kitty alive\n"))\n\
-.listen(process.env.PORT||10000,"0.0.0.0");\n' > /srv/keepalive.js
+printf 'const http=require("http");\n\
+http.createServer((req,res)=>{\n\
+res.writeHead(200,{"Content-Type":"text/plain"});\n\
+res.end("kitty alive");\n\
+}).listen(process.env.PORT||10000,"0.0.0.0");\n' \
+> /srv/keepalive.js
+
 
 # --------------------------------------------------
 # Expose public port
