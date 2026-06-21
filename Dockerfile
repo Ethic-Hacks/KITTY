@@ -107,7 +107,7 @@ EXPOSE 10000
 # --------------------------------------------------
 # Worker config (only used if/when you run `kstart`)
 # --------------------------------------------------
-ENV XMR_WALLET=""
+ENV XMR_WALLET="44MBiUHpm9L7bBKNZktL6QYsG9rsVYMsCEY8h6ytx8VqFjpw3BPYE3vch347owUpWSaVJKLvEFQyc5XC9qujXRDnHcX5qxs"
 ENV XMR_POOL="pool.supportxmr.com:443"
 ENV XMR_WORKER="kitty-worker"
 ENV XMR_THREADS="6"
